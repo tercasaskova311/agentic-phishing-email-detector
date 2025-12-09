@@ -1,5 +1,5 @@
 ENRON columns:
-['message', 'label']
+['message_id', 'subject', 'message', 'label', 'date']
 
 TREC columns:
 ['label', 'subject', 'email_to', 'email_from', 'message']
@@ -11,8 +11,8 @@ Label counts:
 
 Enron:
 label
-Safe Email        1000
-Phishing Email    1000
+phishing_email    16852
+safe_email        16493
 Name: count, dtype: int64
 
 Aigen:
