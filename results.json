@@ -1,0 +1,62 @@
+[
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x123ec6790>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x123b5db10>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1239d34d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1239d0f50>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1239d1290>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1239d2ed0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x11f79b6d0>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "phishing_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x123b5f850>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x123962b50>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  },
+  {
+    "prediction": "error",
+    "confidence": 0.0,
+    "reasoning": "HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x123960510>: Failed to establish a new connection: [Errno 61] Connection refused'))",
+    "true_label": "safe_email"
+  }
+]
