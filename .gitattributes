@@ -1,0 +1,2 @@
+# Track CSV datasets with Git LFS
+datasets/*.csv filter=lfs diff=lfs merge=lfs -text
