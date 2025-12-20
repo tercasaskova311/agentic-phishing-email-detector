@@ -23,6 +23,10 @@ from typing import Dict, List, Tuple, Optional
 import warnings
 warnings.filterwarnings('ignore')
 
+from configs.prompts.zero_shot import ZERO_SHOT_PROMPT
+from configs.prompts.few_shot import FEW_SHOT_PROMPT
+
+
 CONFIG = {
     'model_name': 'meta-llama/Llama-3.2-3B-Instruct',
     
@@ -61,7 +65,6 @@ CONFIG = {
     'checkpoint_every': 1000     # Save progress every N emails
 }
 
-
 print(f"PyTorch version: {torch.__version__}")
 print(f"CUDA available: {torch.cuda.is_available()}")
 if torch.cuda.is_available():
@@ -70,7 +73,7 @@ if torch.cuda.is_available():
 
 
 class ModelLoader:
-    """Handles model loading with optimal Kaggle GPU settings"""
+#Handles model loading => Kaggle GPU settings
     
     @staticmethod
     def load(model_name: str):
@@ -88,17 +91,17 @@ class ModelLoader:
         
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            torch_dtype=torch.float16,      # FP16 for speed
-            device_map="auto",               # Auto GPU placement
-            low_cpu_mem_usage=True,
-            trust_remote_code=True
+            torch_dtype=torch.float16,      # FP16 for speed - in order to fit in kaggle ...
+            device_map="auto",               # Auto GPU placement => best for memory => it does distribute layers across available devices
+            low_cpu_mem_usage=True,      # Reduce CPU memory during load
+            trust_remote_code=True      # Allow custom model code
         )
         
         # Create pipeline
         generator = pipeline(
             "text-generation",
             model=model,
-            tokenizer=tokenizer,
+            tokenizer=tokenizer, #hugging face pipeline needs both model and tokenizer => because it handles tokenization internally
             device=0 if torch.cuda.is_available() else -1
         )
         
@@ -132,59 +135,85 @@ class PhishingDetector:
     def __init__(self, generator, tokenizer):
         self.generator = generator
         self.tokenizer = tokenizer
-        self.prompt_template = self._get_prompt_template()
-    
-    def _get_prompt_template(self) -> str:
-        
-        # Clean, minimal prompt
-        return """You are a cybersecurity expert analyzing emails for phishing attempts.
+        self.config = config
+        self.strategy = config.strategy
 
-Email to analyze:
-{email_text}
-
-Instructions:
-1. Determine if this email is a phishing attempt or safe
-2. Respond with ONLY one word: "PHISHING" or "SAFE"
-
-Your answer:"""
+        self.prompt_template = config.prompt_template
 
 #now important part = why did the model decide to classify wrongly??
-# 
     def analyze(self, email_text: str) -> Tuple[str, str]:
         # Format prompt
         prompt = self.prompt_template.format(
             email_text=email_text[:800]  # Limit to 800 chars
         )
         
-        try:
+        try: #i use try/except to catch generation errors => super importatant since llm can hallucinate etc
             # Generate response
             output = self.generator(
                 prompt,
-                max_new_tokens=CONFIG['generation']['max_new_tokens'],
-                temperature=CONFIG['generation']['temperature'],
-                do_sample=CONFIG['generation']['do_sample'],
-                top_p=CONFIG['generation']['top_p'],
+                max_new_tokens=self.config.generation.max_new_tokens,
+                temperature=self.config.generation.temperature,
+                do_sample=self.config.generation.do_sample,
+                top_p=self.config.generation.top_p,
                 return_full_text=False,
                 pad_token_id=self.tokenizer.eos_token_id
             )
             
-            response = output[0]['generated_text'].strip()
-            response_upper = response.upper()
+            response = output[0]['generated_text'].strip() #strip in order to process easier
             
-            valid_results = [r for r in results if r['prediction'] != 'error']
-            error_count = len(results) - len(valid_results)
-
+            
             #LLMs fail in 3 ways: generation errors, parsing errors, wrong predictions.
             # Parse response
-            if 'PHISHING' in response_upper:
-                return 'phishing_email', response
-            elif 'SAFE' in response_upper:
-                return 'safe_email', response
+            if self.strategy in ['few-shot']:
+                return self._parse_structured_response(response)
             else:
-                return 'error', f'Unclear response: {response}'
+                return self._parse_simple_response(response)
                 
         except Exception as e:
             return 'error', f'Generation error: {str(e)}'
+    
+    def _parse_structured_response(self, response: str) -> Tuple[str, str]:
+        """Parse structured response with REASONING and VERDICT"""
+        
+        verdict = None
+        reasoning = ""
+        
+        # Extract VERDICT
+        if 'VERDICT:' in response:
+            verdict_line = response.split('VERDICT:')[-1].strip().upper()
+            if 'PHISHING' in verdict_line:
+                verdict = 'phishing_email'
+            elif 'SAFE' in verdict_line:
+                verdict = 'safe_email'
+        
+        # Extract REASONING
+        if 'REASONING:' in response:
+            reasoning = response.split('REASONING:')[1].split('VERDICT:')[0].strip()
+        
+        # Fallback
+        if verdict is None:
+            response_upper = response.upper()
+            if 'PHISHING' in response_upper:
+                verdict = 'phishing_email'
+            elif 'SAFE' in response_upper:
+                verdict = 'safe_email'
+            else:
+                verdict = 'error'
+            reasoning = response[:200]
+        
+        return verdict, reasoning
+    
+    def _parse_simple_response(self, response: str) -> Tuple[str, str]:
+        """Parse simple response (just PHISHING or SAFE)"""
+        
+        response_upper = response.upper()
+        
+        if 'PHISHING' in response_upper:
+            return 'phishing_email', response[:100]
+        elif 'SAFE' in response_upper:
+            return 'safe_email', response[:100]
+        else:
+            return 'error', f'Unclear: {response[:100]}'
             
 
 def load_dataset(
@@ -192,14 +221,6 @@ def load_dataset(
     sample_size: Optional[int] = None,
     balanced: bool = True
 ) -> pd.DataFrame:
-    """
-    Load and optionally sample dataset
-    
-    Args:
-        filepath: Path to CSV file
-        sample_size: Number of samples (None = use all)
-        balanced: Whether to balance classes in sampling
-    """
     
     print(f"\nLoading: {filepath}")
     df = pd.read_csv(filepath)
