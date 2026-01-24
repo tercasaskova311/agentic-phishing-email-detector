@@ -1,6 +1,6 @@
 #Zero-shot prompts for phishing detection
 
-ZERO_SHOT_PROMPT = """You are a cybersecurity expert analyzing emails for phishing attempts.
+ZERO_SHOT_A = """You are a cybersecurity expert analyzing emails for phishing attempts.
 
 Email to analyze:
 {email_text}
@@ -13,16 +13,7 @@ Your answer:"""
 
 
 # Alternative versions for A/B testing
-ZERO_SHOT_PROMPT_V2 = """Analyze this email for phishing:
-
-{email_text}
-
-Classification: PHISHING or SAFE
-
-Answer:"""
-
-
-ZERO_SHOT_PROMPT_STRICT = """You are a security analyst. Classify this email.
+ZERO_SHOT_B = """You are a cybersecurity analyst. Classify this email, decide if its a phishing email or normal email. Phishig email means its a spam.
 
 Email:
 {email_text}
