@@ -32,3 +32,21 @@ CONFIG = {
     'use_4bit': False,
     'batch_size': 16,  # Increased for better GPU utilization
 }
+
+
+def get_llm_from_hf(model_name: str):
+    hf_token = os.getenv("HF_TOKEN")
+    if not hf_token:
+        raise RuntimeError("HF_TOKEN not set")
+
+    return HuggingFaceEndpoint(
+        repo_id=model_name,
+        huggingfacehub_api_token=hf_token,
+        temperature=0.2,
+        max_new_tokens=512,
+        top_p=0.9,
+        repetition_penalty=1.1,
+        timeout=120,
+    )
+
+

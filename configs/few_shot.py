@@ -1,6 +1,6 @@
 #Few-shot prompts for phishing detection
 
-FEW_SHOT_PROMPT = """You are a cybersecurity expert analyzing emails for phishing attempts.
+FEW_SHOT_PROMPT = """You are a cybersecurity expert analyzing emails for phishing attempts (spam email - scams).
 
 Here are examples to guide your analysis:
 
