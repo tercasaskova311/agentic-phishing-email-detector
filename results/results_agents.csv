@@ -1,0 +1,59 @@
+type of test,model,Dataset,Accuracy,Precision,Recall,F1,Speed: emails/second
+Single agent - zero shot -  (A/B testing) - A,Qwen/Qwen2.5-3B-Instruct,AIGEN,49.05% ,48.63%,99.23%,65.28%,3.2 emails/second
+Single agent - zero shot -  (A/B testing) - A,Qwen/Qwen2.5-3B-Instruct,ENRON,51.18% ,50.92%,98.95%,67.24%,3.0 emails/second
+Single agent - zero shot -  (A/B testing) - A,Qwen/Qwen2.5-3B-Instruct,TREC,51.56% ,50.69%,99.79%,67.23%,2.7 emails/second
+Single agent - zero shot -  (A/B testing) - A,meta-llama/Llama-3.2-3B-Instruct,AIGEN,85.1%,81.59%,90.76%,85.9%,2.9 emails/second
+Single agent - zero shot -  (A/B testing) - A,meta-llama/Llama-3.2-3B-Instruct,ENRON,77.0%,71.54%,89.50%,83.4%,2.8 emails/second
+Single agent - zero shot -  (A/B testing) - A,meta-llama/Llama-3.2-3B-Instruct,TREC,83.4%,78.84%,91.21%,84.6%,2.3 emails/second
+Single agent - zero shot -  (A/B testing) - A,Qwen/Qwen2.5-7B-Instruct,AIGEN,62.0%,71.6%,96.00%,71.00%,1.8 s
+Single agent - zero shot -  (A/B testing) - A,Qwen/Qwen2.5-7B-Instruct,ENRON,54.0%,68.5%,99.00%,68.49%,1.7 s
+Single agent - zero shot -  (A/B testing) - A,Qwen/Qwen2.5-7B-Instruct,TREC,56.0%,69.4%,100.00%,69.44%,1.5 s
+Single agent - zero shot -  (A/B testing) - A,meta-llama/Llama-3.1-8B-Instruct,AIGEN,80.20%,80.82%,79.20%,80.00%,1.6 s
+Single agent - zero shot -  (A/B testing) - A,meta-llama/Llama-3.1-8B-Instruct,ENRON,81.60%,78.42%,87.20%,82.58%,1.6 s
+Single agent - zero shot -  (A/B testing) - A,meta-llama/Llama-3.1-8B-Instruct,TREC,79.60%,82.46%,75.20%,78.66%,1.4 s
+Single agent - zero shot -  (A/B testing) - A,google/gemma-2-2b-it,AIGEN,73.58% ,66.44%,97.98%,79.18%,2.9 s
+Single agent - zero shot -  (A/B testing) - A,google/gemma-2-2b-it,ENRON,62.50%,57.14%,100%,72.73%,3.1 s
+Single agent - zero shot -  (A/B testing) - A,google/gemma-2-2b-it,TREC,76.5%,70.23%,92.00%,79.65%,2.7
+Single agent - zero shot -  (A/B testing) - B,Qwen/Qwen2.5-3B-Instruct,AIGEN,65.59% ,61.99%,99.47%,76.38%,3.1 emails/second
+Single agent - zero shot -  (A/B testing) - B,Qwen/Qwen2.5-3B-Instruct,ENRON,58.43% ,56.52%,100%,72.22%,2.8 emails/second
+Single agent - zero shot -  (A/B testing) - B,Qwen/Qwen2.5-3B-Instruct,TREC,58.4%,56.51%,99.87%,72.2% ,2.8 emails/second
+Single agent - zero shot -  (A/B testing) - B,meta-llama/Llama-3.2-3B-Instruct,AIGEN,85.26% ,78.74%,98.09%,87.35%,2.8 emails/second
+Single agent - zero shot -  (A/B testing) - B,meta-llama/Llama-3.2-3B-Instruct,ENRON,64.53%,59.02%,97.05%,73.40%,2.7 emails/second
+Single agent - zero shot -  (A/B testing) - B,meta-llama/Llama-3.2-3B-Instruct,TREC,72.60% ,67.04%,96.62%,79.16%,2.4 emails/second
+Single agent - zero shot -  (A/B testing) - B,google/gemma-2-2b-it,AIGEN,78.3%,71.00%,99.60%,82.9%,3.2/s
+Single agent - zero shot -  (A/B testing) - B,google/gemma-2-2b-it,ENRON,57.6%,54.29%,98.60%,70.0% ,3.2/s
+Single agent - zero shot -  (A/B testing) - B,google/gemma-2-2b-it,TREC,75.3%,68.24%,95.95%,79.8%,2.7/s
+Single agent - zero shot -  (A/B testing) - B,Qwen/Qwen2.5-7B-Instruct,AIGEN,63.20%,57.99%,95.80%,72.25%,1.8/s
+Single agent - zero shot -  (A/B testing) - B,Qwen/Qwen2.5-7B-Instruct,ENRON,58.73%,54.90%,97.87%,70.34%,1.7/s
+Single agent - zero shot -  (A/B testing) - B,Qwen/Qwen2.5-7B-Instruct,TREC,65.20% ,59.13%,98.40%,73.87%,1.4/s
+Single agent - zero shot -  (A/B testing) - B,meta-llama/Llama-3.1-8B-Instruct,AIGEN,82.50% ,80.00%,98.09%,87.35%,1.5 s
+Single agent - zero shot -  (A/B testing) - B,meta-llama/Llama-3.1-8B-Instruct,ENRON,64.53%,59.02%,97.05%,73.40%,1.6 s
+Single agent - zero shot -  (A/B testing) - B,meta-llama/Llama-3.1-8B-Instruct,TREC,72.60% ,67.04%,96.62%,79.16%,1.6 s
+Single agent - few shot ,meta-llama/Llama-3.2-3B-Instruct,AIGEN,90.89%,84.40%,94.69%,89.25%,2.2/s
+Single agent - few shot ,meta-llama/Llama-3.2-3B-Instruct,ENRON,82.36%,81.71%,87.59%,84.55%,2.1/s
+Single agent - few shot ,meta-llama/Llama-3.2-3B-Instruct,TREC,86.98%,82.90%,92.16%,87.29%,1.9/s
+Single agent - few shot ,Qwen/Qwen2.5-3B-Instruct,AIGEN,71.14%,57.59%,92.18%,70.89%,1.9/s
+Single agent - few shot ,Qwen/Qwen2.5-3B-Instruct,ENRON,72.93%,66.89%,79.84%,72.79%,1.8s
+Single agent - few shot ,Qwen/Qwen2.5-3B-Instruct,TREC,70.73%,57.09%,74.55%,64.66%,1.6s 
+Single agent - few shot ,google/gemma-2-2b-it,AIGEN,84.19%,76.48%,94.35%,84.48%,2.1s
+Single agent - few shot ,google/gemma-2-2b-it,ENRON,71.11%,66.73%,92.87%,77.66%,2.1s
+Single agent - few shot ,google/gemma-2-2b-it,TREC,63.65%,59.03%,43.20%,49.89%,2.0 s
+Single agent - few shot ,Qwen/Qwen2.5-7B-Instruct,AIGEN,87.92%,89.27%,91.67%,90.45%,1.0 s
+Single agent - few shot ,Qwen/Qwen2.5-7B-Instruct,ENRON,82.50%,88.34%,83.30%,85.75%,0.9 s
+Single agent - few shot ,Qwen/Qwen2.5-7B-Instruct,TREC,86.00%,87.50%,91.01%,90.20%,1.2 s
+Single agent - few shot ,meta-llama/Llama-3.1-8B-Instruct,AIGEN,82.50% ,80.00%,98.09%,87.35%,1.5 s
+Single agent - few shot ,meta-llama/Llama-3.1-8B-Instruct,ENRON,64.53%,59.02%,97.05%,73.40%,1.6 s
+Single agent - few shot ,meta-llama/Llama-3.1-8B-Instruct,TREC,72.60% ,67.04%,96.62%,79.16%,1.6 s
+"Multiagent - graph
+","email_agent: Qwen/Qwen2.5-3B-Instruct                                      url_agent:meta-llama/Llama-3.1-8B-Instruct
+judge_agent: Qwen/Qwen2.5-7B-Instruct                            pattern_agent: meta-llama/Llama-3.2-3B-Instruct",AIGEN,57.1%,65.2%,30.9%,48.2%,
+"Multiagent - graph
+","email_agent: Qwen/Qwen2.5-3B-Instruct                                      url_agent:meta-llama/Llama-3.1-8B-Instruct
+judge_agent: Qwen/Qwen2.5-7B-Instruct                            pattern_agent: meta-llama/Llama-3.2-3B-Instruct",ENRON,58.7%,70.2%,30.2%,41.9%,
+"Multiagent - graph
+","email_agent: Qwen/Qwen2.5-3B-Instruct                                      url_agent:meta-llama/Llama-3.1-8B-Instruct
+judge_agent: Qwen/Qwen2.5-7B-Instruct                            pattern_agent: meta-llama/Llama-3.2-3B-Instruct",TREC,54.7%,54.7%,25.7%,28.3%,
+Multigraph- debating agents- ollama,Qwen/Qwen2.5-3B-Instruct,ENRON,56.1%,62.2%,30.9%,41.3%,0.18 emails/second
+Multigraph- debating agents- ollama,meta-llama/Llama-3.2-3B-Instruct,ENRON,57.7%,67.2%,30.0%,41.5%,0.18 emails/second
+Multigraph- debating agents- ollama,google/gemma-2-2b-it,ENRON,52.8%,58.7%,18.7%,28.3%,0.18 emails/second
+Multigraph- debating agents- ollama,Combined 3 models,ENRON,58.3%,64.4%,37.1%,47%,0.06 emails/second 

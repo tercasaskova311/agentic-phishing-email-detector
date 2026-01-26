@@ -1,2 +1,4 @@
 # Track CSV datasets with Git LFS
 datasets/*.csv filter=lfs diff=lfs merge=lfs -text
+datasets/trec.csv filter=lfs diff=lfs merge=lfs -text
+datasets/enron.csv filter=lfs diff=lfs merge=lfs -text
