@@ -1,0 +1,74 @@
+{
+  "Qwen2.5-3B": {
+    "Enron (3k)": {
+      "accuracy": 0.72,
+      "precision": 0.8438,
+      "recall": 0.54,
+      "f1_score": 0.6585,
+      "emails_per_second": 0.044,
+      "avg_time_per_email": 22.83,
+      "total_time": 2283.06,
+      "sample_size": 100,
+      "success_rate": 0.65
+    },
+    "Combined (2k)": {
+      "accuracy": 0.94,
+      "precision": 0.9362,
+      "recall": 0.9362,
+      "f1_score": 0.9362,
+      "emails_per_second": 0.056,
+      "avg_time_per_email": 17.97,
+      "total_time": 1797.38,
+      "sample_size": 100,
+      "success_rate": 1.0
+    }
+  },
+  "Llama-3.2-3B": {
+    "Enron (3k)": {
+      "accuracy": 0.69,
+      "precision": 0.6267,
+      "recall": 0.94,
+      "f1_score": 0.752,
+      "emails_per_second": 0.074,
+      "avg_time_per_email": 13.44,
+      "total_time": 1343.68,
+      "sample_size": 100,
+      "success_rate": 1.0
+    },
+    "Combined (2k)": {
+      "accuracy": 0.79,
+      "precision": 0.6912,
+      "recall": 1.0,
+      "f1_score": 0.8174,
+      "emails_per_second": 0.063,
+      "avg_time_per_email": 15.93,
+      "total_time": 1592.62,
+      "sample_size": 100,
+      "success_rate": 1.0
+    }
+  },
+  "Gemma-2B": {
+    "Enron (3k)": {
+      "accuracy": 0.5,
+      "precision": 0.5,
+      "recall": 0.96,
+      "f1_score": 0.6575,
+      "emails_per_second": 0.093,
+      "avg_time_per_email": 10.7,
+      "total_time": 1069.71,
+      "sample_size": 100,
+      "success_rate": 1.0
+    },
+    "Combined (2k)": {
+      "accuracy": 0.49,
+      "precision": 0.4796,
+      "recall": 1.0,
+      "f1_score": 0.6483,
+      "emails_per_second": 0.061,
+      "avg_time_per_email": 16.41,
+      "total_time": 1640.85,
+      "sample_size": 100,
+      "success_rate": 1.0
+    }
+  }
+}

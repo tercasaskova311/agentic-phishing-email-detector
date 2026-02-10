@@ -1,0 +1,26 @@
+# Phase 2-3: Data Processing & Traditional ML
+pandas>=1.5.0
+numpy>=1.21.0
+scikit-learn>=1.1.0
+
+# Phase 4-7: LLM & Agent Systems
+torch>=2.0.0
+transformers>=4.30.0
+ollama>=0.1.0
+
+# Agent Frameworks
+crewai>=0.28.0
+langchain>=0.1.0
+langgraph>=0.1.0
+
+# Fine-tuning
+unsloth>=2024.1
+accelerate>=0.20.0
+
+# API Clients
+groq>=0.4.0
+langchain-groq>=0.1.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.65.0
