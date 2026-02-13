@@ -6,12 +6,18 @@ This document presents results from two advanced analyses:
 1. **Ensemble Methods**: Combining Traditional ML + LLM predictions
 2. **Explainability**: Understanding model decisions using SHAP and LIME
 
+**IMPORTANT NOTE**: Initial ensemble results showed artificial 100% accuracy due to train/test data leakage bug. This has been fixed with proper train/test split.
+
 ---
 
-## 1. Ensemble Methods Results
+## 1. Ensemble Methods Results (CORRECTED)
 
 ### Approach
 Combined Logistic Regression (ML) with Llama-3.3-70B (LLM) using various ensemble strategies.
+- Sample size: 200 emails per dataset
+- Split: 100 for training, 100 for testing
+- ML trained on training set only
+- Both ML and LLM evaluated on test set
 
 ### Ensemble Strategies Tested
 
@@ -19,47 +25,75 @@ Combined Logistic Regression (ML) with Llama-3.3-70B (LLM) using various ensembl
 2. **LLM Only**: Use only LLM predictions (baseline)
 3. **Simple Voting**: Majority vote between ML and LLM
 4. **Weighted (70/30)**: 70% weight to ML, 30% to LLM
-5. **ML Primary**: Use ML, but defer to LLM for uncertain cases
-6. **LLM Override**: Allow LLM to override ML for high-confidence phishing
+5. **ML Primary**: Use ML, but defer to LLM for uncertain cases (confidence < 0.6)
+6. **LLM Override**: Allow LLM to override ML for high-confidence phishing (confidence > 0.8)
 
 ### Results
 
-#### Enron Dataset (100 samples)
+#### Enron Dataset (100 test samples)
 
 | Method | Accuracy | Precision | Recall | F1 Score |
 |--------|----------|-----------|--------|----------|
-| **ML Only** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
-| LLM Only | 91.0% | 95.6% | 86.0% | 90.5% |
-| **Simple Voting** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
-| **Weighted (70/30)** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
-| ML Primary | 99.0% | 98.0% | 100.0% | 99.0% |
-| LLM Override | 98.0% | 96.2% | 100.0% | 98.0% |
+| ML Only | 84.0% | 77.1% | 100.0% | 87.1% |
+| LLM Only | 93.0% | 98.0% | 88.9% | 93.2% |
+| Simple Voting | 84.0% | 77.1% | 100.0% | 87.1% |
+| Weighted (70/30) | 84.0% | 77.1% | 100.0% | 87.1% |
+| **ML Primary** | **97.0%** | **98.1%** | **96.3%** | **97.2%** |
+| LLM Override | 83.0% | 76.1% | 100.0% | 86.4% |
 
-#### Combined Dataset (100 samples)
+#### Combined Dataset (100 test samples)
 
 | Method | Accuracy | Precision | Recall | F1 Score |
 |--------|----------|-----------|--------|----------|
-| **ML Only** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
-| LLM Only | 97.0% | 100.0% | 93.6% | 96.7% |
-| **Simple Voting** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
-| **Weighted (70/30)** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
-| **ML Primary** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
+| ML Only | 99.0% | 100.0% | 98.0% | 99.0% |
+| LLM Only | 97.0% | 100.0% | 94.1% | 97.0% |
+| Simple Voting | 99.0% | 100.0% | 98.0% | 99.0% |
+| Weighted (70/30) | 99.0% | 100.0% | 98.0% | 99.0% |
+| ML Primary | 99.0% | 100.0% | 98.0% | 99.0% |
 | **LLM Override** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
 
 ### Key Findings
 
-1. **ML Dominance**: ML alone achieved 100% accuracy on test samples
-2. **Ensemble Benefit**: Simple voting and weighted methods maintained 100% accuracy
-3. **LLM Value**: While LLM alone scored 91-97%, it can validate ML decisions
-4. **Best Strategy**: Weighted (70/30) or Simple Voting for optimal results
-5. **Practical Use**: Ensemble provides confidence validation without sacrificing accuracy
+1. **LLM Outperforms ML on Enron**: LLM alone (93%) beats ML alone (84%) by 9%
+2. **ML Outperforms LLM on Combined**: ML alone (99%) beats LLM alone (97%) by 2%
+3. **Ensemble Adds Real Value**: ML Primary achieves 97% on Enron (better than either alone)
+4. **Perfect Score Possible**: LLM Override reaches 100% on Combined dataset
+5. **Dataset Matters**: Different strategies work best for different datasets
+6. **Confidence Thresholds Work**: ML Primary's confidence-based switching is effective
+
+### Detailed Analysis
+
+**Why LLM Beats ML on Enron:**
+- Enron emails have specific business context
+- ML may overfit to training patterns
+- LLM has broader language understanding
+- Small training set (100 samples) limits ML
+
+**Why ML Beats LLM on Combined:**
+- Combined dataset is more diverse
+- ML learns patterns from training data
+- LLM may be too conservative
+- Larger feature space helps ML
+
+**Why ML Primary Works Best on Enron:**
+- Uses ML as primary classifier (fast, efficient)
+- Defers to LLM when uncertain (confidence < 0.6)
+- Combines ML speed with LLM intelligence
+- Achieves 97% accuracy (4% better than LLM, 13% better than ML)
+
+**Why LLM Override Works Best on Combined:**
+- ML already very accurate (99%)
+- LLM adds high-confidence phishing detection
+- Override only when LLM is very confident (> 0.8)
+- Catches edge cases ML might miss
 
 ### Recommendations
 
-- **For Maximum Accuracy**: Use ML Only or Simple Voting ensemble
-- **For Validation**: Use Weighted (70/30) to get dual confirmation
-- **For Novel Attacks**: LLM Override can catch new phishing patterns ML might miss
-- **Production**: Simple Voting provides best balance of accuracy and robustness
+- **For Enron-like datasets**: Use ML Primary (97% accuracy)
+- **For diverse datasets**: Use LLM Override or ML Only (99-100% accuracy)
+- **For production**: Test both strategies and choose based on validation set
+- **For novel attacks**: LLM Override provides additional safety net
+- **For speed**: ML Only is fastest, ensemble adds validation overhead
 
 ---
 

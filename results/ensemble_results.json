@@ -1,102 +1,102 @@
 {
   "Enron (3k)": {
     "ML Only": {
-      "accuracy": 1.0,
-      "precision": 1.0,
+      "accuracy": 0.84,
+      "precision": 0.7714,
       "recall": 1.0,
-      "f1_score": 1.0,
-      "emails_per_second": 0.635,
-      "total_time": 157.41
+      "f1_score": 0.871,
+      "emails_per_second": 0.614,
+      "total_time": 162.8
     },
     "LLM Only": {
-      "accuracy": 0.91,
-      "precision": 0.9556,
-      "recall": 0.86,
-      "f1_score": 0.9053,
-      "emails_per_second": 0.635,
-      "total_time": 157.41
+      "accuracy": 0.93,
+      "precision": 0.9796,
+      "recall": 0.8889,
+      "f1_score": 0.932,
+      "emails_per_second": 0.614,
+      "total_time": 162.8
     },
     "Simple Voting": {
-      "accuracy": 1.0,
-      "precision": 1.0,
+      "accuracy": 0.84,
+      "precision": 0.7714,
       "recall": 1.0,
-      "f1_score": 1.0,
-      "emails_per_second": 0.635,
-      "total_time": 157.41
+      "f1_score": 0.871,
+      "emails_per_second": 0.614,
+      "total_time": 162.8
     },
     "Weighted (70/30)": {
-      "accuracy": 1.0,
-      "precision": 1.0,
+      "accuracy": 0.84,
+      "precision": 0.7714,
       "recall": 1.0,
-      "f1_score": 1.0,
-      "emails_per_second": 0.635,
-      "total_time": 157.41
+      "f1_score": 0.871,
+      "emails_per_second": 0.614,
+      "total_time": 162.8
     },
     "ML Primary": {
-      "accuracy": 0.99,
-      "precision": 0.9804,
-      "recall": 1.0,
-      "f1_score": 0.9901,
-      "emails_per_second": 0.635,
-      "total_time": 157.41
+      "accuracy": 0.97,
+      "precision": 0.9811,
+      "recall": 0.963,
+      "f1_score": 0.972,
+      "emails_per_second": 0.614,
+      "total_time": 162.8
     },
     "LLM Override": {
-      "accuracy": 0.98,
-      "precision": 0.9615,
+      "accuracy": 0.83,
+      "precision": 0.7606,
       "recall": 1.0,
-      "f1_score": 0.9804,
-      "emails_per_second": 0.635,
-      "total_time": 157.41
+      "f1_score": 0.864,
+      "emails_per_second": 0.614,
+      "total_time": 162.8
     }
   },
   "Combined (2k)": {
     "ML Only": {
-      "accuracy": 1.0,
+      "accuracy": 0.99,
       "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "emails_per_second": 0.452,
-      "total_time": 221.28
+      "recall": 0.9804,
+      "f1_score": 0.9901,
+      "emails_per_second": 0.456,
+      "total_time": 219.36
     },
     "LLM Only": {
       "accuracy": 0.97,
       "precision": 1.0,
-      "recall": 0.9362,
-      "f1_score": 0.967,
-      "emails_per_second": 0.452,
-      "total_time": 221.28
+      "recall": 0.9412,
+      "f1_score": 0.9697,
+      "emails_per_second": 0.456,
+      "total_time": 219.36
     },
     "Simple Voting": {
-      "accuracy": 1.0,
+      "accuracy": 0.99,
       "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "emails_per_second": 0.452,
-      "total_time": 221.28
+      "recall": 0.9804,
+      "f1_score": 0.9901,
+      "emails_per_second": 0.456,
+      "total_time": 219.36
     },
     "Weighted (70/30)": {
-      "accuracy": 1.0,
+      "accuracy": 0.99,
       "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "emails_per_second": 0.452,
-      "total_time": 221.28
+      "recall": 0.9804,
+      "f1_score": 0.9901,
+      "emails_per_second": 0.456,
+      "total_time": 219.36
     },
     "ML Primary": {
-      "accuracy": 1.0,
+      "accuracy": 0.99,
       "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "emails_per_second": 0.452,
-      "total_time": 221.28
+      "recall": 0.9804,
+      "f1_score": 0.9901,
+      "emails_per_second": 0.456,
+      "total_time": 219.36
     },
     "LLM Override": {
       "accuracy": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "f1_score": 1.0,
-      "emails_per_second": 0.452,
-      "total_time": 221.28
+      "emails_per_second": 0.456,
+      "total_time": 219.36
     }
   }
 }

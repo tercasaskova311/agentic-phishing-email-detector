@@ -101,7 +101,7 @@ def ensemble_llm_override(ml_pred, llm_pred, ml_confidence, llm_confidence):
         return 1
     return ml_pred
 
-def test_ensemble(dataset_name, dataset_path, client, sample_size=100):
+def test_ensemble(dataset_name, dataset_path, client, sample_size=200):
     """Test ensemble methods on a dataset"""
     print(f"\n{'='*60}")
     print(f"TESTING ENSEMBLE: {dataset_name}")
@@ -115,37 +115,44 @@ def test_ensemble(dataset_name, dataset_path, client, sample_size=100):
     print(f"\n2. Sampling {sample_size} emails...")
     df_sample = df.sample(n=min(sample_size, len(df)), random_state=42)
     
-    X = df_sample['text'].fillna("")
-    y = df_sample['label']
+    # Split into train and test
+    from sklearn.model_selection import train_test_split
+    train_df, test_df = train_test_split(df_sample, test_size=0.5, random_state=42, stratify=df_sample['label'])
     
-    print(f"   Phishing: {(y == 1).sum()}")
-    print(f"   Legitimate: {(y == 0).sum()}")
+    X_train = train_df['text'].fillna("")
+    y_train = train_df['label']
+    X_test = test_df['text'].fillna("")
+    y_test = test_df['label']
+    
+    print(f"   Training: {len(train_df)} emails ({(y_train == 1).sum()} phishing)")
+    print(f"   Testing: {len(test_df)} emails ({(y_test == 1).sum()} phishing)")
     
     # Train ML model
     print("\n3. Training ML model (Logistic Regression)...")
     vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
-    X_vec = vectorizer.fit_transform(X)
+    X_train_vec = vectorizer.fit_transform(X_train)
+    X_test_vec = vectorizer.transform(X_test)
     
     ml_model = LogisticRegression(max_iter=1000, random_state=42)
-    ml_model.fit(X_vec, y)
+    ml_model.fit(X_train_vec, y_train)
     
     # Get ML predictions with confidence
-    ml_proba = ml_model.predict_proba(X_vec)
-    ml_preds = ml_model.predict(X_vec)
+    ml_proba = ml_model.predict_proba(X_test_vec)
+    ml_preds = ml_model.predict(X_test_vec)
     ml_confidences = np.max(ml_proba, axis=1)
     
     print(f"   ✓ ML model trained")
-    print(f"   ML Accuracy: {accuracy_score(y, ml_preds):.4f}")
+    print(f"   ML Test Accuracy: {accuracy_score(y_test, ml_preds):.4f}")
     
     # Get LLM predictions
-    print(f"\n4. Getting LLM predictions...")
+    print(f"\n4. Getting LLM predictions on test set...")
     llm_preds = []
     llm_confidences = []
     
     start_time = time.time()
-    for i, text in enumerate(X):
+    for i, text in enumerate(X_test):
         if (i + 1) % 20 == 0:
-            print(f"   Progress: {i+1}/{len(X)} emails...")
+            print(f"   Progress: {i+1}/{len(X_test)} emails...")
         
         pred, conf = classify_with_llm(client, text)
         llm_preds.append(pred)
@@ -157,7 +164,7 @@ def test_ensemble(dataset_name, dataset_path, client, sample_size=100):
     llm_confidences = np.array(llm_confidences)
     
     print(f"   ✓ LLM predictions completed")
-    print(f"   LLM Accuracy: {accuracy_score(y, llm_preds):.4f}")
+    print(f"   LLM Test Accuracy: {accuracy_score(y_test, llm_preds):.4f}")
     
     # Test ensemble strategies
     print(f"\n5. Testing ensemble strategies...")
@@ -188,7 +195,7 @@ def test_ensemble(dataset_name, dataset_path, client, sample_size=100):
         ensemble_preds = np.array(ensemble_preds)
         
         # Calculate metrics (use LLM time as baseline)
-        metrics = calculate_metrics(y, ensemble_preds, llm_time, len(y))
+        metrics = calculate_metrics(y_test, ensemble_preds, llm_time, len(y_test))
         
         print(f"\n   {method_name}:")
         print(f"     Accuracy:  {metrics['accuracy']:.4f} ({metrics['accuracy']*100:.1f}%)")
@@ -231,7 +238,7 @@ def main():
     # Test each dataset
     for dataset_name, dataset_path in datasets.items():
         try:
-            results = test_ensemble(dataset_name, dataset_path, client, sample_size=100)
+            results = test_ensemble(dataset_name, dataset_path, client, sample_size=200)
             all_results[dataset_name] = results
         except Exception as e:
             print(f"\n✗ Error testing {dataset_name}: {e}")

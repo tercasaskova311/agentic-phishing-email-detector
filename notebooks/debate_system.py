@@ -8,6 +8,7 @@ import pandas as pd
 from pathlib import Path
 import time
 import json
+import os
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from groq import Groq
 

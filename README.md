@@ -14,7 +14,7 @@ This project explores how far we can push Large Language Models (LLMs) for phish
 
 
 
-## Quick Results Summary
+## Results Summary
 
 ### Enron Dataset (3,000 emails)
 
@@ -400,15 +400,21 @@ See `COLAB_INSTRUCTIONS.md` for detailed steps.
 
 ### Ensemble Methods (ML + LLM)
 
-Combined Traditional ML with LLM predictions using various strategies:
+Combined Traditional ML with LLM predictions using various strategies on proper train/test splits:
 
-**Results on 100-sample tests:**
-- **Simple Voting**: 100% accuracy on both datasets
-- **Weighted (70/30)**: 100% accuracy on both datasets  
-- **ML Primary**: 99-100% accuracy
-- **LLM Override**: 98-100% accuracy
+**Results (100 test samples per dataset):**
 
-**Key Finding**: Ensemble methods maintain ML's high accuracy while adding LLM validation for robustness against novel attacks.
+Enron Dataset:
+- **ML Primary (Best)**: 97.0% accuracy, 97.2% F1
+- LLM Only: 93.0% accuracy, 93.2% F1
+- ML Only: 84.0% accuracy, 87.1% F1
+
+Combined Dataset:
+- **LLM Override (Best)**: 100.0% accuracy, 100.0% F1
+- ML Only: 99.0% accuracy, 99.0% F1
+- LLM Only: 97.0% accuracy, 97.0% F1
+
+**Key Finding**: Ensemble methods successfully combine strengths - ML Primary achieves 97% on Enron (better than either alone), and LLM Override reaches perfect 100% on Combined dataset.
 
 [Full Results](results/ENSEMBLE_AND_EXPLAINABILITY.md)
 
