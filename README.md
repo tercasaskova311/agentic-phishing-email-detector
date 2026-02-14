@@ -516,28 +516,3 @@ Analyzed model decisions to understand feature importance:
 - Results can guide user education and filtering rules
 
 [Full Analysis](results/ENSEMBLE_AND_EXPLAINABILITY.md)
-
-## Contributing
-
-This is a research project. For questions or suggestions, please open an issue on GitHub.
-
-## Citation
-
-If you use this work, please cite:
-```
-Phishing Email Detection: Comprehensive ML & LLM Analysis
-GitHub: https://github.com/06sahar06/phishing-emails
-Year: 2026
-```
-
-## Acknowledgments
-
-- Enron email dataset
-- Groq for fast LLM inference API
-- Unsloth for efficient fine-tuning
-- Open-source LLM community
-
-## Contact
-
-GitHub: [@06sahar06](https://github.com/06sahar06)
-Repository: [phishing-emails](https://github.com/06sahar06/phishing-emails)
