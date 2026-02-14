@@ -160,7 +160,7 @@ All approaches evaluated using:
 
 ```
 phishing-detection-project/
-├── data/                          # Raw datasets
+├── first_datasets/                # Raw datasets
 │   ├── enron.csv
 │   ├── legit.csv
 │   └── phishing.csv
