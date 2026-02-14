@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""
-Phase 2: Preprocessing Phishing Dataset
-Format: sender, receiver, date, subject, body, urls, label
-Goal: Extract 1.5k phishing emails for balanced dataset
-"""
-
 import pandas as pd
 import numpy as np
 from pathlib import Path

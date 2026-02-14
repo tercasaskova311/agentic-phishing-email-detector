@@ -1,9 +1,3 @@
-"""
-Phase 4C: Chain-of-Thought Prompting for Phishing Detection
-
-Ask the model to explain its reasoning step-by-step before classifying.
-Expected improvement: 1-3% accuracy boost through better reasoning
-"""
 
 import pandas as pd
 from groq import Groq

@@ -1,9 +1,3 @@
-"""
-Few-Shot Prompting for Phishing Detection
-
-Provides 4 example classifications to guide the LLM.
-Achieved 94.37% accuracy on Enron dataset (+3.37% over zero-shot).
-"""
 
 import pandas as pd
 from groq import Groq

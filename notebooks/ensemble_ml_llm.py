@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Ensemble Methods: Combine Traditional ML + LLM predictions
-Test different ensemble strategies to achieve best of both worlds
-"""
-
 import pandas as pd
 import numpy as np
 from pathlib import Path

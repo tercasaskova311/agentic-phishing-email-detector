@@ -1,9 +1,3 @@
-"""
-Phase 4D: LLM Ensemble (Multiple Models Voting)
-
-Use multiple LLMs and take majority vote for final classification.
-Expected improvement: 2-4% accuracy boost through ensemble diversity
-"""
 
 import pandas as pd
 from groq import Groq

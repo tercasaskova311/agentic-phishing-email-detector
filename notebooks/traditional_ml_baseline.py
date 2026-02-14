@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Phase 3: Traditional ML Baseline
-Test Logistic Regression, Naive Bayes, and Random Forest on both datasets
-"""
-
 import pandas as pd
 import numpy as np
 from pathlib import Path

@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Phase 2: Create Combined Balanced Dataset
-Combine legit.csv and phishing.csv to create a balanced 2k dataset (1k each)
-"""
-
 import pandas as pd
 from pathlib import Path
 

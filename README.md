@@ -52,7 +52,7 @@ Selected 3 open-source LLMs for testing:
 - **meta-llama/Llama-3.2-3B-Instruct**: Strong performance, widely adopted
 - **google/gemma-2-2b-it**: Lightweight, resource-efficient
 
-[Detailed Documentation](docs/PHASE1_MODEL_SELECTION.md)
+[Detailed Documentation](docs/MODEL_SELECTION.md)
 
 ### Data Preprocessing
 - Cleaned and standardized three raw datasets
@@ -60,7 +60,7 @@ Selected 3 open-source LLMs for testing:
 - Generated two test datasets: Enron (3k) and Combined (2k)
 - Separate preprocessing for each dataset due to different formats
 
-[Detailed Documentation](docs/PHASE2_DATA_PREPROCESSING.md)
+[Detailed Documentation](docs/DATA_PREPROCESSING.md)
 
 ### Traditional ML Baseline
 Tested classical ML models with TF-IDF features on both datasets:
@@ -77,7 +77,7 @@ Tested classical ML models with TF-IDF features on both datasets:
 
 **Result**: Excellent baseline (97-99% accuracy), extremely fast (100k+ emails/second)
 
-[Detailed Documentation](docs/PHASE3_TRADITIONAL_ML.md)
+[Detailed Documentation](docs/TRADITIONAL_ML.md)
 
 ### Single LLM Evaluation
 Tested LLMs via Groq API (zero-shot classification) on both datasets:
@@ -92,7 +92,7 @@ Tested LLMs via Groq API (zero-shot classification) on both datasets:
 
 **Result**: Competitive performance (91-97%), but slower and below traditional ML
 
-[Detailed Documentation](docs/PHASE4_SINGLE_LLM.md)
+[Detailed Documentation](docs/SINGLE_LLM.md)
 
 ### Multi-Agent Debate System
 Three-agent system (Attacker, Defender, Judge) tested on both datasets:
@@ -106,7 +106,7 @@ Three-agent system (Attacker, Defender, Judge) tested on both datasets:
 
 **Result**: Underperformed single LLM, high failure rates, 3-5x slower
 
-[Detailed Documentation](docs/PHASE5_DEBATE_SYSTEM.md)
+[Detailed Documentation](docs/MULTI_AGENT_DEBATE.md)
 
 ### Graph-Based Systems (LangGraph)
 Structured workflow using LangGraph tested on both datasets:
@@ -118,8 +118,6 @@ Structured workflow using LangGraph tested on both datasets:
 - 53% accuracy, 2% success rate (98% failures)
 
 **Result**: Poor performance with implementation issues causing unreliable metrics. Removed from comparison tables.
-
-[Detailed Documentation](docs/PHASE6_LANGGRAPH.md)
 
 ### Fine-Tuning
 
@@ -134,7 +132,7 @@ Fine-tuned Gemma 2B model with LoRA on phishing detection task:
 
 **Achievement**: Closed the gap from 7% to 1.61% on Enron dataset through fine-tuning
 
-[Detailed Documentation](docs/PHASE7_FINETUNING.md)
+[Detailed Documentation](docs/FINETUNING.md)
 
 ## Evaluation Metrics
 
@@ -147,14 +145,12 @@ All approaches evaluated using:
 
 ## Complete Documentation
 
-- [Complete Project Summary](COMPLETE_PROJECT_SUMMARY.md) - Comprehensive overview of all phases
-- [Phase 1: Model Selection](docs/PHASE1_MODEL_SELECTION.md)
-- [Phase 2: Data Preprocessing](docs/PHASE2_DATA_PREPROCESSING.md)
-- [Phase 3: Traditional ML](docs/PHASE3_TRADITIONAL_ML.md)
-- [Phase 4: Single LLM](docs/PHASE4_SINGLE_LLM.md)
-- [Phase 5: Debate System](docs/PHASE5_DEBATE_SYSTEM.md)
-- [Phase 6: LangGraph](docs/PHASE6_LANGGRAPH.md)
-- [Phase 7: Fine-Tuning](docs/PHASE7_FINETUNING.md)
+- [Model Selection](docs/MODEL_SELECTION.md)
+- [Data Preprocessing](docs/DATA_PREPROCESSING.md)
+- [Traditional ML](docs/TRADITIONAL_ML.md)
+- [Single LLM](docs/SINGLE_LLM.md)
+- [Multi-Agent Debate](docs/MULTI_AGENT_DEBATE.md)
+- [Fine-Tuning](docs/FINETUNING.md)
 
 ## Project Structure
 
@@ -164,14 +160,13 @@ phishing-detection-project/
 │   ├── enron.csv
 │   ├── legit.csv
 │   └── phishing.csv
-├── docs/                          # Detailed phase documentation
-│   ├── PHASE1_MODEL_SELECTION.md
-│   ├── PHASE2_DATA_PREPROCESSING.md
-│   ├── PHASE3_TRADITIONAL_ML.md
-│   ├── PHASE4_SINGLE_LLM.md
-│   ├── PHASE5_DEBATE_SYSTEM.md
-│   ├── PHASE6_LANGGRAPH.md
-│   └── PHASE7_FINETUNING.md
+├── docs/                          # Documentation
+│   ├── MODEL_SELECTION.md
+│   ├── DATA_PREPROCESSING.md
+│   ├── TRADITIONAL_ML.md
+│   ├── SINGLE_LLM.md
+│   ├── MULTI_AGENT_DEBATE.md
+│   └── FINETUNING.md
 ├── notebooks/                     # Evaluation scripts
 │   ├── preprocess_*.py           # Data preprocessing
 │   ├── traditional_ml_baseline.py # ML baseline
@@ -186,11 +181,7 @@ phishing-detection-project/
 ├── results/                       # Evaluation results
 │   ├── enron_preprocessed_3k.csv
 │   ├── combined_preprocessed_2k.csv
-│   ├── PHASE*_RESULTS.md
-│   └── PHASE4B_FEW_SHOT_RESULTS.md
-├── COMPLETE_PROJECT_SUMMARY.md   # Comprehensive overview
-├── ADDITIONAL_TECHNIQUES.md      # Guide to additional methods
-├── COLAB_INSTRUCTIONS.md         # Fine-tuning instructions
+│   └── README.md
 ├── README.md                      # This file
 └── requirements.txt               # Dependencies
 ```
@@ -362,8 +353,8 @@ python notebooks/chain_of_thought_prompting.py
 python notebooks/llm_ensemble.py
 ```
 
-### 5. Fine-Tuning (Google Colab)
-See `COLAB_INSTRUCTIONS.md` for detailed steps.
+### 5. Fine-Tuning
+Fine-tuning requires GPU access. See documentation for details.
 
 ## Detailed Results
 

@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""
-Phase 4: Single LLM Evaluation using Groq API
-Test each LLM individually on both datasets using fast Groq inference
-Models: Qwen2.5-3B, Llama-3.2-3B, Gemma-2-2B (via Groq equivalents)
-"""
-
 import pandas as pd
 import numpy as np
 from pathlib import Path

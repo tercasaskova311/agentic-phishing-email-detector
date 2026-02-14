@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""
-Phase 2: Preprocessing Enron Dataset
-Format: Message ID, Subject, Message, Spam/Ham, Date
-Goal: Create balanced 3k sample (1.5k phishing + 1.5k legitimate)
-"""
-
 import pandas as pd
 import numpy as np
 from pathlib import Path

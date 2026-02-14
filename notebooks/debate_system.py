@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Phase 5: Improved Multi-Agent Debate System
-Better prompts with structured output and error handling
-"""
-
 import pandas as pd
 from pathlib import Path
 import time
