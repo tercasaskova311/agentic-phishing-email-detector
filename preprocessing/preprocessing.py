@@ -1,9 +1,7 @@
 import pandas as pd
 from sklearn.utils import resample
 
-# ---------------------------
-# LOAD DATA
-# ---------------------------
+
 enron = pd.read_csv('data/enron.csv')
 legit = pd.read_csv('data/legit.csv')
 phishing = pd.read_csv('data/phishing.csv')
@@ -18,30 +16,25 @@ print("Enron:", enron.columns)
 print("TREC:", trec.columns)
 print("aigen:", aigen.columns)
 
-# ---------------------------
-# HANDLE MISSING VALUES
-# ---------------------------
+
 print("\nMissing values:")
 print(enron.isna().sum())
 print(aigen.isna().sum())
 print(trec.isna().sum())
 
-# Drop rows where critical fields are missing
-critical_cols = ['message', 'label']  # adjust to your real column names
+critical_cols = ['message', 'label'] 
 enron = enron.dropna(subset=critical_cols)
 aigen = aigen.dropna(subset=critical_cols)
 trec = trec.dropna(subset=critical_cols)
 
-# ---------------------------
-# NORMALIZE LABELS
-# ---------------------------
+
 enron['label'] = enron['label'].replace({
     'spam': 'phishing_email',
     'ham': 'safe_email'
 })
 
 aigen['label'] = aigen['label'].replace({
-    1 : 'phishing_email', #llmgenerated
+    1 : 'phishing_email', 
     0 : 'safe_email'
 })
 
